@@ -6,7 +6,7 @@
     var setRequestHeader = XHR.setRequestHeader;
 
     XHR.open = function(method, url) {
-        this._method = method;
+        this._method = method.toUpperCase();
         this._url = url;
         this._requestHeaders = {};
         return open.apply(this, arguments);
@@ -32,7 +32,11 @@
                 }, {});
             }
             var responseBody = this.responseText;
-            var requst = {
+            //if Content-Type: multipart/form-data; requestBody is object
+            if (typeof requestBody === "object" ) {
+                requestBody = null;
+            }
+            var request = {
                 url:this._url,
                 method:this._method,
                 responseType:this.responseType,
@@ -42,7 +46,8 @@
                 responseBody:responseBody
             }
 
-            console.log(requst);
+            var requestInterceptedEvent = new CustomEvent("RequestIntercepted",{detail:request});
+            document.dispatchEvent(requestInterceptedEvent);
         });
         return send.apply(this, arguments);
     };

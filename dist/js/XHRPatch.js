@@ -60,16 +60,18 @@
 /******/ 	__webpack_require__.p = "/";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 1);
+/******/ 	return __webpack_require__(__webpack_require__.s = 4);
 /******/ })
 /************************************************************************/
-/******/ ([
-/* 0 */,
-/* 1 */
+/******/ ({
+
+/***/ 4:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 (function () {
     var XHR = XMLHttpRequest.prototype;
@@ -79,7 +81,7 @@
     var setRequestHeader = XHR.setRequestHeader;
 
     XHR.open = function (method, url) {
-        this._method = method;
+        this._method = method.toUpperCase();
         this._url = url;
         this._requestHeaders = {};
         return open.apply(this, arguments);
@@ -105,7 +107,11 @@
                 }, {});
             }
             var responseBody = this.responseText;
-            var requst = {
+            //if Content-Type: multipart/form-data; requestBody is object
+            if ((typeof requestBody === "undefined" ? "undefined" : _typeof(requestBody)) === "object") {
+                requestBody = null;
+            }
+            var request = {
                 url: this._url,
                 method: this._method,
                 responseType: this.responseType,
@@ -115,11 +121,13 @@
                 responseBody: responseBody
             };
 
-            console.log(requst);
+            var requestInterceptedEvent = new CustomEvent("RequestIntercepted", { detail: request });
+            document.dispatchEvent(requestInterceptedEvent);
         });
         return send.apply(this, arguments);
     };
 })();
 
 /***/ })
-/******/ ]);
+
+/******/ });
