@@ -1,7 +1,7 @@
 module.exports = {
   entry: {
     content:'./src/js/content.js',
-    inject:'./src/js/inject.js',
+    XHRPatch:'./src/js/XHRPatch.js',
     background:'./src/js/background.js'
   },
   module: {

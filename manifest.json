@@ -14,10 +14,9 @@
     },
 
     "content_scripts": [{
-        "matches": ["<all_urls>","*://toms-energetic-sheep.s1.umbraco.io/*"],
+        "matches": ["*://toms-energetic-sheep.s1.umbraco.io/*"],
         "js":[
-                "/dist/js/content.js",
-                "/dist/js/inject.js"
+                "/dist/js/content.js"
              ],
         "css":[
 
@@ -41,5 +40,5 @@
         "debugger"
     ],
 
-    "web_accessible_resources": ["/dist/js/inject.js"]
+    "web_accessible_resources": ["/dist/js/XHRPatch.js"]
 }
