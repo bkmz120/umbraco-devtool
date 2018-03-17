@@ -227,7 +227,7 @@ var RequestsStorage = function () {
             var relatedRequest = null;
             if (POSTRequest.responseBody !== null && POSTRequest.responseBody.key !== undefined && POSTRequest.responseBody.id !== undefined) {
                 for (var i = 0; i < this._storage.length; i++) {
-                    if (this._storage[i].responseBody.key === POSTRequest.responseBody.key) {
+                    if (this._storage[i].responseBody.key === POSTRequest.responseBody.key && this._storage[i].responseBody.id === POSTRequest.responseBody.id) {
                         //here we foun releated GET request for POST request
                         relatedRequest = this._storage[i];
                         // this._storage.splice(i,1);
@@ -824,7 +824,6 @@ var PrettyDifferences = function () {
             var deletedColor = "#e57454";
             var arrayColor = "#c4b0c1";
 
-            console.log(differences);
             for (var i = 0; i < differences.length; i++) {
                 var path = differences[i].path.join(".");
                 if (differences[i].kind === "E") {

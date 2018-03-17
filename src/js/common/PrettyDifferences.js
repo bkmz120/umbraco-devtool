@@ -6,7 +6,6 @@ export default class PrettyDifferences {
         const deletedColor = "#e57454";
         const arrayColor = "#c4b0c1";
 
-        console.log(differences);
         for (var i=0;i<differences.length;i++) {
             var path = differences[i].path.join(".");
             if (differences[i].kind==="E") {

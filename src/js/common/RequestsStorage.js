@@ -16,7 +16,7 @@ export default class RequestsStorage {
         let relatedRequest = null;
         if (POSTRequest.responseBody!==null && POSTRequest.responseBody.key!==undefined && POSTRequest.responseBody.id!==undefined) {
             for (var i=0;i<this._storage.length;i++) {
-                if (this._storage[i].responseBody.key === POSTRequest.responseBody.key) {
+                if (this._storage[i].responseBody.key === POSTRequest.responseBody.key && this._storage[i].responseBody.id === POSTRequest.responseBody.id) {
                     //here we foun releated GET request for POST request
                     relatedRequest = this._storage[i];
                     // this._storage.splice(i,1);
